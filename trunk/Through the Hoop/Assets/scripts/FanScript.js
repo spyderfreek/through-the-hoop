@@ -21,7 +21,7 @@ function FixedUpdate(){
 		var ballDistance = Vector3.Distance(myTransform.position,ballTransform.position);
 		Debug.Log(ballDistance);
 		if( ballDistance < 5.0 && AngleBetween < 30.0 ){
-			ball.GetComponent("Rigidbody").AddForce(ballDirection * ( 8.0 - ballDistance));
+			ball.GetComponent("Rigidbody").AddForce(ballDirection * ( 10.0 - ballDistance));
 			Debug.Log("In Wind");
 		}       
  
