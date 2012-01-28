@@ -1,10 +1,12 @@
-var numLevels = 3;
+var numLevels:int = 3;
+var levelControls:GameObject;
 
 function LevelButton( level:int ) {
 	if (GUILayout.Button ("Level " + level,
 		GUILayout.MaxWidth(200))) {
 		Application.LoadLevel( level );
-		LevelControls:
+		this.active = false;
+		levelControls.active = true;
 	}
 }
 
