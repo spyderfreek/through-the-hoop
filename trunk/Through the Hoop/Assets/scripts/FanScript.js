@@ -1,5 +1,5 @@
 private var ball:GameObject;
-
+var ballSpeed : float = 20;
 
 
 function start(){
@@ -24,7 +24,7 @@ function OnTriggerStay (other : Collider) {
 		var ballDistance = Vector3.Distance(myTransform.position,ballTransform.position);
 		//Debug.Log(ballDistance);
 	
-			ball.GetComponent("Rigidbody").AddForce(ballDirection * ( 50 - ballDistance));
+			ball.GetComponent("Rigidbody").AddForce(ballDirection * ( ballSpeed - ballDistance));
 	
 	Debug.Log("is inside trigger");
 }
