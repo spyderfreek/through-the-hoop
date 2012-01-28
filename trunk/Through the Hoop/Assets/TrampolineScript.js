@@ -1,4 +1,4 @@
 function OnTriggerEnter()
 {
-	Debug.Log("Hi");
+	//Debug.Log("Hi");
 }
