@@ -1,4 +1,7 @@
-function OnTriggerEnter()
+private var anim:AnimationState;
+
+function OnCollision()
 {
-	//Debug.Log("Hi");
+	anim = animation["bounce"];
+	anim.Play("bounce");
 }
