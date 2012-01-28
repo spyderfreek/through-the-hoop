@@ -1,14 +1,16 @@
+var mat:Material;
+var glowColor:Color = Color(1,1,1,0.5);
+var normalColor:Color = Color(1,1,1,0);
+
 
 function OnMouseEnter() 
 {
-	GetComponent("Halo").enabled = true;
-	//RenderSettings.haloStrength = 5;
-	Debug.Log("Mouse has entered object");
+	mat.SetColor("_Color", glowColor);
+	Debug.Log("mouse enter");
 }
 
 function OnMouseExit()
 {	
-	GetComponent("Halo").enabled = false;
-	//RenderSettings.haloStrength = 0;
-	Debug.Log("Mouse has left object");
+	mat.SetColor("_Color", normalColor);
+	Debug.Log("mouse exit");
 }
