@@ -1,11 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Environment_MouseOver.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TrampolineScript.js">
     <Files>
-      <File FileName="Assets\scripts\HaloController.js" Line="3" Column="1" />
-      <File FileName="Assets\scripts\LevelLoader.js" Line="12" Column="6" />
-      <File FileName="Assets\scripts\LevelControls.js" Line="24" Column="40" />
-      <File FileName="Assets\scripts\Environment_MouseOver.js" Line="10" Column="53" />
+      <File FileName="Assets\scripts\FanScript.js" Line="29" Column="2" />
+      <File FileName="Assets\TrampolineScript.js" Line="3" Column="4" />
+      <File FileName="Assets\scripts\HaloController.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\LevelLoader.js" Line="7" Column="1" />
+      <File FileName="Assets\scripts\LevelControls.js" Line="32" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
