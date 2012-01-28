@@ -1,5 +1,9 @@
 var mainMenu:GameObject;
 
+function Start() {
+	DontDestroyOnLoad(this);
+}
+
 function OnGUI () {
 	// Wrap everything in the designated GUI Area
 	GUILayout.BeginArea (Rect (10,Screen.height - 60,Screen.width - 20,50));
@@ -28,7 +32,7 @@ function OnGUI () {
 	// Quit
 	if (GUILayout.Button (GUIContent ("Quit", "Return to the main menu"),
 		GUILayout.MaxWidth(200))) {
-		this.active = false;
+		gameObject.active = false;
 		mainMenu.active = true;
 	}
 	
