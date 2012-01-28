@@ -11,6 +11,7 @@ private var goBall:GameObject = null;
 
 //keep track of how long will the win screen will last
 public var fWinTimeScale:float = 1.5f;
+public var fWinTimeAccel:float = 0.02f;
 
 private var fTimeSinceFirstLoop = 0.0f;
 public var fTimeWinDiration = 5.0f;
@@ -55,6 +56,7 @@ function Update () {
 	if(bWin == true)
 	{
 	fTimeSinceFirstLoop += Time.deltaTime / Time.timeScale;
+	Time.timeScale += fWinTimeAccel;
 	
 		if(fTimeSinceFirstLoop > fTimeWinDiration)
 		{
