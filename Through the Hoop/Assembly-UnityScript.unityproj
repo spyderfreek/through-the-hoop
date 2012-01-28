@@ -51,7 +51,6 @@
      <Compile Include="Assets\scripts\LevelLoader.js" />
      <Compile Include="Assets\scripts\PortalTrigger.js" />
      <Compile Include="Assets\scripts\ShootAndReceiveBall_Level 1.js" />
-     <Compile Include="Assets\scripts\ShootAndReceiveBall_Level 2.js" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
