@@ -12,7 +12,10 @@ function OnMouseEnter()
 {
 	if(hasMultipleObjects) {
 		for( var child : Transform in transform.parent ) {
-			child.gameObject.GetComponent(Renderer).material.SetColor("_Color", glowColor);
+			var rend:Renderer = child.gameObject.GetComponent(Renderer);
+			if( rend ) {
+				rend.material.SetColor("_Color", glowColor);
+			}
 		}
 	}
 	else {
@@ -25,7 +28,10 @@ function OnMouseExit()
 {	
 	if(hasMultipleObjects) {
 		for( var child : Transform in transform.parent ) {
-			child.gameObject.GetComponent(Renderer).material.SetColor("_Color", normalColor);
+			var rend:Renderer = child.gameObject.GetComponent(Renderer);
+			if( rend ) {
+				rend.material.SetColor("_Color", normalColor);
+			}
 		}
 	}
 	else {
