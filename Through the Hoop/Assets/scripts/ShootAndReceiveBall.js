@@ -8,6 +8,9 @@ public var fTimeToCheck:float = 1.0f;
 
 //keep an instinse of a ball
 private var goBall:GameObject;
+
+//keep track of how long will the win screen will last
+
 function Update () {
 if (Input.GetKeyDown ("space"))
 {
@@ -55,6 +58,8 @@ Debug.Log("Winhit");
 goBall.transform.position = this.transform.position;
 goBall.rigidbody.velocity.x = 0.0;
 goBall.rigidbody.velocity.y = 0.0;
+
+
 }
 
 function OnTriggerEnter (myTrigger : Collider) {
