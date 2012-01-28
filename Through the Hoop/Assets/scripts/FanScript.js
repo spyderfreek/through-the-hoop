@@ -24,7 +24,7 @@ function OnTriggerStay (other : Collider) {
 		var ballDistance = Vector3.Distance(myTransform.position,ballTransform.position);
 		//Debug.Log(ballDistance);
 	
-			ball.GetComponent("Rigidbody").AddForce(ballDirection * ( 16.5 - ballDistance));
+			ball.GetComponent("Rigidbody").AddForce(ballDirection * ( 50 - ballDistance));
 	
 	Debug.Log("is inside trigger");
 }

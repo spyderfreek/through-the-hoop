@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 
 Project("{8256EAF8-6B69-D029-755F-E76EC3BE0DE8}") = "Through the Hoop", "Assembly-CSharp-firstpass.csproj", "{B9CD3778-5B54-575D-85A9-9D2AF463AD52}"
 EndProject
-Project("{8256EAF8-6B69-D029-755F-E76EC3BE0DE8}") = "Through the Hoop", "Assembly-CSharp-Editor-firstpass.csproj", "{A869BABC-EFEF-6DD8-0F1D-ABEF111A7174}"
-EndProject
 Project("{8256EAF8-6B69-D029-755F-E76EC3BE0DE8}") = "Through the Hoop", "Assembly-UnityScript-firstpass.unityproj", "{E2671AD1-FA18-D1B0-9CBE-9044F4641F63}"
 EndProject
 Project("{8256EAF8-6B69-D029-755F-E76EC3BE0DE8}") = "Through the Hoop", "Assembly-UnityScript.unityproj", "{A4ADF37B-871A-4369-1520-BA4B7A047F28}"
@@ -21,10 +19,6 @@ Global
 		{B9CD3778-5B54-575D-85A9-9D2AF463AD52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9CD3778-5B54-575D-85A9-9D2AF463AD52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9CD3778-5B54-575D-85A9-9D2AF463AD52}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A869BABC-EFEF-6DD8-0F1D-ABEF111A7174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A869BABC-EFEF-6DD8-0F1D-ABEF111A7174}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A869BABC-EFEF-6DD8-0F1D-ABEF111A7174}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A869BABC-EFEF-6DD8-0F1D-ABEF111A7174}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E2671AD1-FA18-D1B0-9CBE-9044F4641F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E2671AD1-FA18-D1B0-9CBE-9044F4641F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2671AD1-FA18-D1B0-9CBE-9044F4641F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
