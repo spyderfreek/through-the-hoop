@@ -1,4 +1,5 @@
-GUI.Button (Rect (10,10,100,20), GUIContent ("Click me", "This is the tooltip"));
+var mainMenu:GameObject;
+
 function OnGUI () {
 	// Wrap everything in the designated GUI Area
 	GUILayout.BeginArea (Rect (10,Screen.height - 60,Screen.width - 20,50));
@@ -27,7 +28,8 @@ function OnGUI () {
 	// Quit
 	if (GUILayout.Button (GUIContent ("Quit", "Return to the main menu"),
 		GUILayout.MaxWidth(200))) {
-		print("Quit clicked");
+		this.active = false;
+		mainMenu.active = true;
 	}
 	
 	GUILayout.EndHorizontal();
