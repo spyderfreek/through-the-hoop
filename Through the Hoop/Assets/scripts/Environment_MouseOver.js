@@ -3,6 +3,10 @@ var hasMultipleObjects:boolean = false;
 var glowColor:Color = Color(1,1,1,0.5);
 var normalColor:Color = Color(1,1,1,0);
 
+function Start()
+{
+	mat.SetColor("_Color", normalColor);
+}
 
 function OnMouseEnter() 
 {
