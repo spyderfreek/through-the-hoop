@@ -16,7 +16,7 @@ public var fWinTimeAccel:float = 0.02f;
 private var fTimeSinceFirstLoop = 0.0f;
 public var fTimeWinDiration = 5.0f;
 
-
+private var bActive = false;
 
 private var bWin = false;
 var blackTexture : Texture;
