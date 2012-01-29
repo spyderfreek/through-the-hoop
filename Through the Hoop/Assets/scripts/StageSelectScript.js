@@ -143,8 +143,16 @@ function OnGUI()
 			break;
 		case 2:
 				Application.LoadLevel(szStage_2);
- 
-			break;
+				break;
+		case 3:
+				Application.LoadLevel(szStage_3);
+ 				break;
+ 		case 4:
+				Application.LoadLevel(szStage_4);
+ 				break;
+ 		case 5:
+				Application.LoadLevel(szStage_5);
+ 				break;		
 
 	}
 	}

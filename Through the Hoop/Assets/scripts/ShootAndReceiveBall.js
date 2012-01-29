@@ -64,6 +64,7 @@ function Update () {
 		if(fTimeSinceFirstLoop > fTimeWinDiration)
 		{
 			//change to win scene
+			Time.timeScale = 1;
 			Application.LoadLevel("WinScreen");
 		}
 	
