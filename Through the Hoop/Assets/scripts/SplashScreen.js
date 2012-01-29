@@ -1,8 +1,8 @@
-private var fChangeTime:float = 0.0f;
+private var fChangeTime:float;
 public var fChangeDuration: float = 1.0f;
 
-private var fStillTime:float = 0.0f;
-private var fStillDuration:float = 3.0f;
+private var fStillTime:float;
+public var fStillDuration:float = 3.0f;
 
 
 private var nState:int = 0;
@@ -11,6 +11,11 @@ public var SplashImage : Texture;
 public var szNextScene:String;
 
 public var bStayOnStillUntilInput:boolean = false;
+
+function OnEnable(){
+	fChangeTime  = 0.0f;
+	fStillTime  = 0.0f;
+}
 
 function OnGUI(){
 	var nColorVar:float = (fChangeTime / fChangeDuration);

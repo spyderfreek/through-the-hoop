@@ -16,7 +16,7 @@ public var fWinTimeAccel:float = 0.02f;
 private var fTimeSinceFirstLoop = 0.0f;
 public var fTimeWinDiration = 5.0f;
 
-private var bActive = false;
+
 
 private var bWin = false;
 var blackTexture : Texture;
@@ -123,7 +123,7 @@ Time.timeScale = fWinTimeScale;
 
 function OnTriggerEnter (myTrigger : Collider) {
  //if(myTrigger.gameObject.name.IndexOf("Ball") == 0){
- if(myTrigger.gameObject == goBall)
+ if(myTrigger.gameObject == goBall && Vector3.Dot( myTrigger.rigidbody.velocity, transform.up ) < 0)
   WinHit();
 }
 
