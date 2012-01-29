@@ -40,7 +40,7 @@ function Update () {
  	ShootBall();
 	}
 
-	if(bBallLaunched == true)
+	if(bBallLaunched == true && bWin == false)
 	{
 
 		fTimePassed += Time.deltaTime;
@@ -49,6 +49,9 @@ function Update () {
 		fTimePassed = fTimeToCheck;
 		//if a cirtain amount has passed since the ball been launch set the collider back on.
 		Physics.IgnoreCollision(goBall.collider, collider,false);
+		var goBlocker:GameObject = transform.GetChild(0).gameObject;
+		
+		Physics.IgnoreCollision(goBlocker.collider, goBall.collider,false);
 		}
 	
 	}
@@ -60,8 +63,6 @@ function Update () {
 	
 		if(fTimeSinceFirstLoop > fTimeWinDiration)
 		{
-			//restore time scale
-			Time.timeScale = 1;
 			//change to win scene
 			Application.LoadLevel("WinScreen");
 		}
@@ -101,9 +102,12 @@ function ShootBall()
 	
 	//make sure that collison form fire point is off.
 	Physics.IgnoreCollision(goBall.collider, collider);
+	var goBlocker:GameObject = transform.GetChild(0).gameObject;
+	Physics.IgnoreCollision(goBlocker.collider, goBall.collider);
 	
 	bWin = false;
 	
+
 
 }
 
@@ -112,6 +116,9 @@ function ShootBall()
 function WinHit()
 {
 
+  		var goBlocker:GameObject = transform.GetChild(0).gameObject;
+		//Physics.IgnoreCollision(goBlocker.collider, goBall.collider,true);
+		Destroy(goBlocker);
 Debug.Log("Winhit");
 	bWin = true;
 goBall.transform.position = this.transform.position;
@@ -126,7 +133,10 @@ Time.timeScale = fWinTimeScale;
 function OnTriggerEnter (myTrigger : Collider) {
  //if(myTrigger.gameObject.name.IndexOf("Ball") == 0){
  if(myTrigger.gameObject == goBall && Vector3.Dot( myTrigger.rigidbody.velocity, transform.up ) < 0)
+ {
   WinHit();
+
+  }
 }
 
 
