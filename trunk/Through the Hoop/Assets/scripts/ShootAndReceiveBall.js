@@ -92,7 +92,7 @@ function ShootBall()
 {
 
 	if(bBallLaunched == true)
-	return;
+		Init();
 	
 	fTimePassed = 0.0f;
 	
