@@ -1,10 +1,16 @@
 public var picStage_0 : Texture;
 public var picStage_1 : Texture;
 public var picStage_2 : Texture;
+public var picStage_3 : Texture;
+public var picStage_4 : Texture;
+public var picStage_5 : Texture;
 
 public var szStage_0 : String;
 public var szStage_1 : String;
 public var szStage_2 : String;
+public var szStage_3 : String;
+public var szStage_4 : String;
+public var szStage_5 : String;
 
 private var nSelectedStage:int;
 
@@ -92,27 +98,39 @@ function OnGUI()
 //background box
 	GUI.Box (Rect (10,10,Screen.width - 20, Screen.height - 20), "Stage Select");
 
-	GUI.Box (Rect (nButtonBoxStartX,nButtonBoxStartY,nButtonBoxWidth,nButtonBoxHeight),"");
+	GUI.Box (Rect (nButtonBoxStartX,nButtonBoxStartY,nButtonBoxWidth,nButtonBoxHeight+40),"");
 	
-	GUI.Box(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * nSelectedStage) - 5, nButtonStartY_Stage + (nButtonNextY_Stage * nSelectedStage) - 5, nButtonSizeX_Stage + 10, nButtonSizeY_Stage + 10),"");
+	GUI.Box(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * nSelectedStage) - 5, nButtonStartY_Stage + ((nButtonNextY_Stage * nSelectedStage)/2) -5, nButtonSizeX_Stage + 10, nButtonSizeY_Stage + 10),"");
 	
-	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 0), nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 1"))
+	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 0)/2, nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 1"))
 	{
 		nSelectedStage = 0;
 	}	
 
-	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 1), nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 2"))
+	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 1)/2, nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 2"))
 	{
 		nSelectedStage = 1;
 	}	
 
-	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 2), nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 3"))
+	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 2)/2, nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 3"))
 	{
 		nSelectedStage = 2;
+	}
+	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 3)/2, nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 4"))
+	{
+		nSelectedStage = 3;
 	}	
+	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 4)/2, nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 5"))
+	{
+		nSelectedStage = 4;
+	}	
+	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 5)/2, nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 6"))
+	{
+		nSelectedStage = 5;
+	}		
 	
 	//Go
-	if(GUI.Button(Rect(nButtonStartX_GO,nButtonStartY_GO, nButtonSizeX_GO,nButtonSizeY_GO),"Start"))
+	if(GUI.Button(Rect(nButtonStartX_GO-200,nButtonStartY_GO, nButtonSizeX_GO,nButtonSizeY_GO),"Start"))
 	{
 	 	switch( nSelectedStage)
 	{
@@ -132,7 +150,7 @@ function OnGUI()
 	}
 	
 	//back
-	if(GUI.Button(Rect(nButtonStartX_Back,nButtonStartY_Back, nButtonSizeX_Back,nButtonSizeY_Back),"Back"))
+	if(GUI.Button(Rect(nButtonStartX_Back-200,nButtonStartY_Back, nButtonSizeX_Back,nButtonSizeY_Back),"Back"))
 	{
 		//go back to main menu 
 			Application.LoadLevel("MainMenu");
@@ -159,6 +177,24 @@ function OnGUI()
  			if ( picStage_2 != null)
 			{
 				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_2 ); 
+			}
+			break;
+		case 3:
+ 			if ( picStage_3 != null)
+			{
+				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_3 ); 
+			}
+			break;
+		case 4:
+ 			if ( picStage_4 != null)
+			{
+				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_4 ); 
+			}
+			break;
+		case 5:
+ 			if ( picStage_5 != null)
+			{
+				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_5 ); 
 			}
 			break;
 
