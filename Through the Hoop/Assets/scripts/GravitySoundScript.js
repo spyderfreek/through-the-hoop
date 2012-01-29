@@ -14,5 +14,5 @@ function OnTriggerStay () {
      var myTransform:Transform = gameObject.GetComponent("Transform");
  
      var distance = Vector3.Distance(ballTransform.position, myTransform.position);
-	gameObject.GetComponent(AudioSource).volume = 
+	gameObject.GetComponent(AudioSource).volume = distance / gameObject.collider.radius;
 }
