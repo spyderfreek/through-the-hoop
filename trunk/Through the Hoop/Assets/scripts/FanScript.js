@@ -3,7 +3,7 @@ var ballSpeed : float = 20;
 
 
 function start(){
-    
+    audio.Play();
 }
 
 function OnTriggerStay (other : Collider) {
@@ -28,4 +28,6 @@ function OnTriggerStay (other : Collider) {
 	
 	Debug.Log("is inside trigger");
 }
+
+
 

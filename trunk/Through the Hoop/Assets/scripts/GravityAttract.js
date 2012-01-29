@@ -1,6 +1,11 @@
 var attractionCoeff: float = 2.0;
 var cutoffDistance: float = 4.0;
 
+function Start(){
+    audio.Play();
+
+}
+
 function FixedUpdate () {
      if( GameObject.Find("Ball(Clone)") != null){
          //Debug.Log("in ball");
