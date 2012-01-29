@@ -44,7 +44,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\Drag.js" />
      <Compile Include="Assets\scripts\Environment_MouseOver.js" />
      <Compile Include="Assets\scripts\FanScript.js" />
      <Compile Include="Assets\scripts\GlowPulse.js" />
