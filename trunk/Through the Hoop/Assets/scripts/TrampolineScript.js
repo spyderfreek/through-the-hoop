@@ -6,7 +6,7 @@ function OnCollisionEnter( collision : Collision )
 
 	var normal:Vector3 = transform.rotation * Vector3(0,1,0);
 	
-	if( collision.rigidbody.name == "Ball" && Vector3.Dot( collision.transform.position, transform.position ) >= 0 ) {
+	if( collision.rigidbody.name == "Ball(Clone)" && Vector3.Dot( collision.transform.position, transform.position ) >= 0 ) {
 		collision.rigidbody.AddForce( normal * force );
 	}
 }

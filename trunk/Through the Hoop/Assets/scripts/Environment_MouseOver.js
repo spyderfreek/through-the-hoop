@@ -72,10 +72,6 @@ function OnMouseEnter()
 
 function OnMouseExit()
 {	
-	if( GetLaunched() ) {
-		return;
-	}
-	
 	if(hasMultipleObjects) {
 		for( var child : Transform in transform.parent ) {
 			var rend:Renderer = child.gameObject.GetComponent(Renderer);
