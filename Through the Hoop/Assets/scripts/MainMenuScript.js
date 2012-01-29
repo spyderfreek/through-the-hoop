@@ -2,32 +2,41 @@ public var picTitle : Texture;
 
 private var recTitle:Rect;// = new Rect(.25f * Screen.width, .25 * Screen.Height , .5f *Screen.width, .25 *Screen.Height );
 
-private var nButtons:int = 4;
-
-private var nButtonStartX:int;
-private var nButtonStartY:int;
-
-private var nButtonNextX:int;
-private var nButtonNextY:int;
-
-private var nButtonSizeX:int;
-private var nButtonSizeY:int;
-
+private var recStart:Rect;
+private var rectInstruction:Rect;
+private var rectCredit:Rect;
 
 function Start()
 {
-	recTitle = new Rect((Screen.width * 1/4), (Screen.height * 1/4) , (Screen.width * 2/4), (Screen.height * 1/4));
+	recTitle = new Rect(0, 0 , Screen.width,Screen.height);
+	var fPicWidth:float = 4800.0f;
+	var fScreenWidth:float = Screen.width;
+
+	var fPicHeight:float = 2700.0f;
+	var fScreenHeight:float = Screen.height;
 	
-	nButtonStartX = ((1.0f/16.0f) * Screen.width);
-	nButtonStartY = ((6.0f/8.0f) * Screen.height);
+	var fWidthRatio:float = fPicWidth / fScreenWidth;
+	var fHeightRatio:float = fPicHeight / fScreenHeight;
 	
-	nButtonNextX = ( (4.0f/16.0f) * Screen.width);
-	nButtonNextY = 0;
-	
-	nButtonSizeX = ((2.0f/16.0f) * Screen.width);
-	nButtonSizeY = ((1.0f/8.0f) * Screen.height);
+	//picTitle.width
+	var xStartRect:int = 1800;
+	var yStartRect:int = 1500;
 	
 	
+	var xSizeRect:int = 1300;
+	var ySizeRect:int = 250;
+	
+	var yChangeRect:int = 300 / fHeightRatio;
+	
+	
+	//start creating the rect
+	recStart = new Rect(xStartRect / fWidthRatio , yStartRect /fHeightRatio, xSizeRect / fWidthRatio, ySizeRect / fHeightRatio );
+	
+	rectInstruction = new Rect(recStart);
+	rectInstruction.y += yChangeRect;
+	
+	rectCredit = new Rect(rectInstruction);
+	rectCredit.y += yChangeRect;
 	
 }
 
@@ -35,24 +44,47 @@ function OnGUI()
 {
 
 	GUI.color = new Color(1,1,1,1);
+	GUI.DrawTexture( recTitle, picTitle );
+	
+	//get the mouse pos
+	
+	var mousePosition = Input.mousePosition;
+
+    /* adjust the y-coordinate for the GUI's coordinate system */
+
+    mousePosition.y = Screen.height - mousePosition.y;
+
+
+	if(recStart.Contains(mousePosition))
+	{
+		if(GUI.Button(recStart,""))
+		{
+			ButtonPressed(0);
+		}
+	}
+	
+	if(rectInstruction.Contains(mousePosition))
+	{
+		if(GUI.Button(rectInstruction,""))
+		{
+			ButtonPressed(1);
+		}
+	}
+	
+	if(rectCredit.Contains(mousePosition))
+	{
+		if(GUI.Button(rectCredit,""))
+		{
+			ButtonPressed(2);
+		}	
+	}
+	//if(GUI.Button(Rect(nButtonStartX + (nButtonNextX * 3), nButtonStartY, nButtonSizeX, nButtonSizeY),"Quit"))
+	//{
+		//ButtonPressed(3);
+	//}
+	
 	//GUI.DrawTexture( recTitle, picTitle );
 	
-	if(GUI.Button(Rect(nButtonStartX + (nButtonNextX * 0), nButtonStartY, nButtonSizeX, nButtonSizeY),"Start"))
-	{
-		ButtonPressed(0);
-	}
-	if(GUI.Button(Rect(nButtonStartX + (nButtonNextX * 1), nButtonStartY, nButtonSizeX, nButtonSizeY),"Instruction"))
-	{
-		ButtonPressed(1);
-	}
-	if(GUI.Button(Rect(nButtonStartX + (nButtonNextX * 2), nButtonStartY, nButtonSizeX, nButtonSizeY),"Credit"))
-	{
-		ButtonPressed(2);
-	}
-	if(GUI.Button(Rect(nButtonStartX + (nButtonNextX * 3), nButtonStartY, nButtonSizeX, nButtonSizeY),"Quit"))
-	{
-		ButtonPressed(3);
-	}
 }
 
 function Update () {
@@ -69,6 +101,7 @@ private function ButtonPressed(nButtonID)
 			break;
 		case 1:
 			//load the Instruction
+			Application.LoadLevel("Instruction");
 			break;
 		case 2:
 			//load the Credit
