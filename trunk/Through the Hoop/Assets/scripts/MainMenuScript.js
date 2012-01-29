@@ -64,6 +64,7 @@ private function ButtonPressed(nButtonID)
 	{
 		case 0:
 			//load the Stage Select
+			Application.LoadLevel("StageSelect");
 			
 			break;
 		case 1:
