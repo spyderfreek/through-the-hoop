@@ -101,7 +101,7 @@ private function ButtonPressed(nButtonID)
 			break;
 		case 1:
 			//load the Instruction
-			Application.LoadLevel("Instruction");
+			Application.LoadLevel("Instructions");
 			break;
 		case 2:
 			//load the Credit
