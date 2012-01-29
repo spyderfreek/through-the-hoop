@@ -15,6 +15,11 @@ private var yratio: double;
 private var ballPlane: Plane;
 private var offsetVec: Vector3;
 
+function GetLaunched()
+{
+	return GameObject.Find("BallStart").GetComponent("ShootAndReceiveBall").bBallLaunched;
+}
+
 function Start()
 {
 	mat.SetColor("_Color", normalColor);
@@ -48,6 +53,9 @@ function Start()
 
 function OnMouseEnter() 
 {
+	if( GetLaunched() ) {
+		return;
+	}
 	if(hasMultipleObjects) {
 		for( var child : Transform in transform.parent ) {
 			var rend:Renderer = child.gameObject.GetComponent(Renderer);
@@ -64,6 +72,10 @@ function OnMouseEnter()
 
 function OnMouseExit()
 {	
+	if( GetLaunched() ) {
+		return;
+	}
+	
 	if(hasMultipleObjects) {
 		for( var child : Transform in transform.parent ) {
 			var rend:Renderer = child.gameObject.GetComponent(Renderer);
@@ -80,6 +92,10 @@ function OnMouseExit()
 
 function OnMouseDown()
 {
+	if( GetLaunched() ) {
+		return;
+	}
+	
 	//mouse click controls
 	if(Input.GetMouseButtonDown(0)){
 	    var hit : RaycastHit;
@@ -98,6 +114,10 @@ function OnMouseDown()
 
 function OnMouseDrag()
 {	
+	if( GetLaunched() ) {
+		return;
+	}
+	
 	if (Input.GetMouseButton(0)) {
    
            //var OldPosition = selectedObject.GetComponent("Transform").position;
@@ -123,9 +143,12 @@ function OnMouseDrag()
 
 function OnMouseUp()
 {
+	if( GetLaunched() ) {
+		return;
+	}
+	
     if(Input.GetMouseButtonUp(0)){
-        Debug.Log("I am stupid");
-        if(haveSelected) haveSelected = false;
+        haveSelected = false;
     
     }
 }
