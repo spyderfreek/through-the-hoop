@@ -1,7 +1,12 @@
-private var anim:AnimationState;
+var force : float = 2.0;
 
-function OnCollision()
+function OnCollisionEnter( collision : Collision )
 {
-	anim = animation["bounce"];
-	anim.Play("bounce");
+	animation.Play("bounce");
+
+	var normal:Vector3 = transform.rotation * Vector3(0,1,0);
+	
+	if( collision.rigidbody.name == "Ball" && Vector3.Dot( collision.transform.position, transform.position ) >= 0 ) {
+		collision.rigidbody.AddForce( normal * force );
+	}
 }
