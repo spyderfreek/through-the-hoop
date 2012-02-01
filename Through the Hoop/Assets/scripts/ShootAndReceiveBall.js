@@ -92,8 +92,10 @@ function Init()
 function ShootBall()
 {
 
-	if(bBallLaunched == true)
+	if(bBallLaunched == true) {
 		Init();
+		return;
+	}
 	
 	fTimePassed = 0.0f;
 	
