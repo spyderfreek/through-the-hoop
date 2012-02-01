@@ -5,6 +5,8 @@ private var recTitle:Rect;// = new Rect(.25f * Screen.width, .25 * Screen.Height
 private var recStart:Rect;
 private var rectInstruction:Rect;
 private var rectCredit:Rect;
+private var hasSelectedLevel:boolean = false;
+private var levelToLoad:String;
 
 function Start()
 {
@@ -88,6 +90,13 @@ function OnGUI()
 }
 
 function Update () {
+	if (Input.GetKey ("escape")) {
+        Application.Quit();
+    }
+    
+    if( hasSelectedLevel && Application.CanStreamedLevelBeLoaded( levelToLoad ) ) {
+    	Application.LoadLevel( levelToLoad );
+    }
 }
 
 private function ButtonPressed(nButtonID)
@@ -96,16 +105,16 @@ private function ButtonPressed(nButtonID)
 	{
 		case 0:
 			//load the Stage Select
-			Application.LoadLevel("StageSelect");
+			levelToLoad = "StageSelect";
 			
 			break;
 		case 1:
 			//load the Instruction
-			Application.LoadLevel("Instructions");
+			levelToLoad = "Instructions";
 			break;
 		case 2:
 			//load the Credit
-			Application.LoadLevel("Credits");
+			levelToLoad = "Credits";
 			
 			break;
 		case 3:
@@ -113,4 +122,6 @@ private function ButtonPressed(nButtonID)
 			Application.Quit();
 			break;
 	}
+	
+	hasSelectedLevel = true;
 }
