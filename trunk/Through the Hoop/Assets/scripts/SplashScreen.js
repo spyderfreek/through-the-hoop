@@ -62,11 +62,15 @@ function Update () {
 	{
 		//fade to black
 		fChangeTime -= Time.deltaTime;
-		if(fChangeTime <= 0)
+		if(fChangeTime <= 0 && Application.CanStreamedLevelBeLoaded(szNextScene) )
 		{
 			//change to another
 			Application.LoadLevel(szNextScene);
 			
+		}
+		else if( fChangeTime <= 0 )
+		{
+			fChangeTime = 0;
 		}
 		
 	}

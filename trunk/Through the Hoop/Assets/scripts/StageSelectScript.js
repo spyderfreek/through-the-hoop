@@ -14,6 +14,9 @@ public var szStage_5 : String;
 
 private var nSelectedStage:int;
 
+private var hasSelectedLevel:boolean = false;
+private var levelToLoad:String;
+
 //Boxes
 private var nButtonBoxStartX;
 private var nButtonBoxStartY;
@@ -133,36 +136,37 @@ function OnGUI()
 	if(GUI.Button(Rect(nButtonStartX_GO-200,nButtonStartY_GO, nButtonSizeX_GO,nButtonSizeY_GO),"Start"))
 	{
 	 	switch( nSelectedStage)
-	{
-	 	case 0:
-				Application.LoadLevel(szStage_0);
-			break;
-		case 1:
-				Application.LoadLevel(szStage_1);
- 
-			break;
-		case 2:
-				Application.LoadLevel(szStage_2);
+		{
+		 	case 0:
+					levelToLoad = szStage_0;
 				break;
-		case 3:
-				Application.LoadLevel(szStage_3);
- 				break;
- 		case 4:
-				Application.LoadLevel(szStage_4);
- 				break;
- 		case 5:
-				Application.LoadLevel(szStage_5);
- 				break;		
-
-	}
+			case 1:
+					levelToLoad = szStage_1;
+	 
+				break;
+			case 2:
+					levelToLoad = szStage_2;
+					break;
+			case 3:
+					levelToLoad = szStage_3;
+	 				break;
+	 		case 4:
+					levelToLoad = szStage_4;
+	 				break;
+	 		case 5:
+					levelToLoad = szStage_5;
+	 				break;		
+	
+		}
+		hasSelectedLevel = true;
 	}
 	
 	//back
 	if(GUI.Button(Rect(nButtonStartX_Back-200,nButtonStartY_Back, nButtonSizeX_Back,nButtonSizeY_Back),"Back"))
 	{
 		//go back to main menu 
-			Application.LoadLevel("MainMenu");
-		
+		levelToLoad = "MainMenu";
+		hasSelectedLevel = true;
 	} 
 	
 	//drawImage
@@ -209,4 +213,7 @@ function OnGUI()
 	}
 }
 function Update () {
+	if( hasSelectedLevel && Application.CanStreamedLevelBeLoaded( levelToLoad ) ) {
+    	Application.LoadLevel( levelToLoad );
+    }
 }
