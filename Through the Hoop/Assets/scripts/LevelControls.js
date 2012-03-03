@@ -16,6 +16,8 @@ function OnGUI () {
 	// Level Reset
 	if (GUILayout.Button (GUIContent ("Reset", "Moves all pieces to their starting locations and resets the ball"),
 		GUILayout.MaxWidth(100))) {
+		GameObject.Find("BallStart").GetComponent(ShootAndReceiveBall).hasLevelSwitched = true;
+		Time.timeScale = 1;
 		Application.LoadLevel( Application.loadedLevelName );
 	}
 	
@@ -23,6 +25,8 @@ function OnGUI () {
 	if (GUILayout.Button (GUIContent ("Level Menu", "Return to the Level Select Menu"),
 		GUILayout.MaxWidth(100))) {
 		gameObject.GetComponent( "LevelControls" ).enabled = false;
+		GameObject.Find("BallStart").GetComponent(ShootAndReceiveBall).hasLevelSwitched = true;
+		Time.timeScale = 1;
 		Application.LoadLevel( "StageSelect" );
 	}
 	
