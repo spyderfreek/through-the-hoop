@@ -16,20 +16,36 @@ public var fWinTimeAccel:float = 0.02f;
 private var fTimeSinceFirstLoop = 0.0f;
 public var fTimeWinDiration = 5.0f;
 
-public var hasLevelSwitched:boolean = false;private var bBallLeft = false;
+public var hasLevelSwitched:boolean = false;
+
+private var bBallLeft = false;
 
 private var bWin = false;
 var blackTexture : Texture;
 
 public var szWinScene;
 
+private var nTimeBallInPlay = 0.0f;
+
+public function GetTimeBallInPlay()
+{
+return nTimeBallInPlay;
+}
+
+
 function OnGUI(){
 
-//using whatever texture is fine as long as there is no transparent textures
-
-
+	//using whatever texture is fine as long as there is no transparent textures	
+	//drawing the Fading
  	GUI.color = new Color(0, 0, 0, fTimeSinceFirstLoop/ fTimeWinDiration);
 	GUI.DrawTexture( new Rect(0, 0, Screen.width, Screen.height ), blackTexture );
+	
+	//draw the timer
+ 	GUI.color = new Color(1,1,1,1);
+
+
+	GUI.Box(new Rect(Screen.width * 16/20, 0, Screen.width * 4/20, Screen.height * 3/20 ), "Time: \n" + Mathf.RoundToInt(nTimeBallInPlay));
+	//GUI.Box(new Rect(0,0,50,50), "Time: " + roundNumber(num, dec));
 }
 
 function Update () {
@@ -40,6 +56,12 @@ function Update () {
  	ShootBall();
 	}
 
+	if(bBallLaunched == true && bWin == false)
+	{
+		//keep track of time when the ball is launched
+		nTimeBallInPlay += Time.deltaTime;
+
+	}
 	
 	if(bWin == true)
 	{
@@ -78,7 +100,7 @@ function Init()
 	
 	bBallLeft = false;
 	Time.timeScale = 1.0f;
-	
+	nTimeBallInPlay = 0.0f;
 }
 
 function ShootBall()
@@ -116,6 +138,8 @@ goBall.rigidbody.velocity.y = 0.0;
 
 
 Time.timeScale = fWinTimeScale;
+
+//also save the timer.
 
 }
 
@@ -169,3 +193,7 @@ function OnTriggerExit( myTrigger : Collider ){
 	}
 }
 
+function roundNumber(num, dec) {
+	var result = Mathf.Round(num*Mathf.Pow(10,dec))/Mathf.Pow(10,dec);
+	return result;
+}
