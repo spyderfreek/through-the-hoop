@@ -16,6 +16,8 @@ public var fWinTimeAccel:float = 0.02f;
 private var fTimeSinceFirstLoop = 0.0f;
 public var fTimeWinDiration = 5.0f;
 
+public var hasLevelSwitched:boolean = false;
+
 
 
 private var bWin = false;
@@ -59,7 +61,6 @@ function Update () {
 	if(bWin == true)
 	{
 	fTimeSinceFirstLoop += Time.deltaTime / Time.timeScale;
-	Time.timeScale += fWinTimeAccel;
 	
 		if(fTimeSinceFirstLoop > fTimeWinDiration)
 		{
@@ -67,6 +68,11 @@ function Update () {
 			Time.timeScale = 1;
 			Application.LoadLevel("WinScreen");
 		}
+		else if( !hasLevelSwitched )
+		{
+			Time.timeScale += fWinTimeAccel;
+		}
+		Debug.Log( "hasLevelSwitched = " + hasLevelSwitched );
 	
 	}
 	
