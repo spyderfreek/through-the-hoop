@@ -135,11 +135,20 @@ Time.timeScale = fWinTimeScale;
 
 function OnTriggerEnter (myTrigger : Collider) {
  //if(myTrigger.gameObject.name.IndexOf("Ball") == 0){
- if(myTrigger.gameObject == goBall && Vector3.Dot( myTrigger.rigidbody.velocity, transform.up ) < 0
- 	&& Vector3.Dot( transform.position - myTrigger.transform.position, transform.up ) < 0 )
+ if(myTrigger.gameObject == goBall)
  {
-  WinHit();
+ if(  Vector3.Dot( myTrigger.rigidbody.velocity, transform.up ) < 0
+ 	&& Vector3.Dot( transform.position - myTrigger.transform.position, transform.up ) < 0 )
+ 	{
+  		WinHit();
 
+  	}
+  	else if (bWin == false)
+  	{
+  	
+  		//stop due to user going thought the hoop in the opisit direction.
+  		Init();
+  	}
   }
 }
 
