@@ -16,9 +16,7 @@ public var fWinTimeAccel:float = 0.02f;
 private var fTimeSinceFirstLoop = 0.0f;
 public var fTimeWinDiration = 5.0f;
 
-public var hasLevelSwitched:boolean = false;
-
-
+public var hasLevelSwitched:boolean = false;private var bBallLeft = false;
 
 private var bWin = false;
 var blackTexture : Texture;
@@ -42,21 +40,6 @@ function Update () {
  	ShootBall();
 	}
 
-	if(bBallLaunched == true && bWin == false)
-	{
-
-		fTimePassed += Time.deltaTime;
-		if(fTimePassed > fTimeToCheck)
-		{
-		fTimePassed = fTimeToCheck;
-		//if a cirtain amount has passed since the ball been launch set the collider back on.
-		Physics.IgnoreCollision(goBall.collider, collider,false);
-		var goBlocker:GameObject = transform.GetChild(0).gameObject;
-		
-		Physics.IgnoreCollision(goBlocker.collider, goBall.collider,false);
-		}
-	
-	}
 	
 	if(bWin == true)
 	{
@@ -93,6 +76,9 @@ function Init()
 	
 	bWin = false;
 	
+	bBallLeft = false;
+	Time.timeScale = 1.0f;
+	
 }
 
 function ShootBall()
@@ -108,11 +94,7 @@ function ShootBall()
 	bBallLaunched = true;
 	goBall = Instantiate(prefab, transform.position, Quaternion.identity);
 	fTimeSinceFirstLoop = 0.0f;
-	
-	//make sure that collison form fire point is off.
-	Physics.IgnoreCollision(goBall.collider, collider);
-	var goBlocker:GameObject = transform.GetChild(0).gameObject;
-	Physics.IgnoreCollision(goBlocker.collider, goBall.collider);
+
 	
 	bWin = false;
 	
@@ -125,9 +107,7 @@ function ShootBall()
 function WinHit()
 {
 
-  		var goBlocker:GameObject = transform.GetChild(0).gameObject;
-		//Physics.IgnoreCollision(goBlocker.collider, goBall.collider,true);
-		Destroy(goBlocker);
+
 Debug.Log("Winhit");
 	bWin = true;
 goBall.transform.position = this.transform.position;
@@ -143,8 +123,13 @@ function OnTriggerEnter (myTrigger : Collider) {
  //if(myTrigger.gameObject.name.IndexOf("Ball") == 0){
  if(myTrigger.gameObject == goBall)
  {
- if(  Vector3.Dot( myTrigger.rigidbody.velocity, transform.up ) < 0
- 	&& Vector3.Dot( transform.position - myTrigger.transform.position, transform.up ) < 0 )
+ 	if(bBallLeft == false)
+ 		return;
+ 
+ //if(  Vector3.Dot( myTrigger.rigidbody.velocity, transform.up ) < 0
+ //	&& Vector3.Dot( transform.position - myTrigger.transform.position, transform.up ) < 0 )
+ 	
+ 	if(myTrigger.transform.position.y > this.transform.position.y)
  	{
   		WinHit();
 
@@ -152,11 +137,35 @@ function OnTriggerEnter (myTrigger : Collider) {
   	else if (bWin == false)
   	{
   	
-  		//stop due to user going thought the hoop in the opisit direction.
+  		//stop due to user going thought the hoop at the bottom
   		Init();
   	}
   }
 }
 
+function OnTriggerExit( myTrigger : Collider ){
+	if(myTrigger.gameObject == goBall)
+	{
+	
+		if(this.bBallLeft == true)
+			return;
+	
+	
+		if(goBall.transform.position.y < this.transform.position.y)
+		{
+		//ball is leaving from the bottom
+			this.bBallLeft = true;
+		
+		}
+		else
+		{
+		//ball is leaving from the top
+			Init();
+		}
 
+		
+ 		
+ 		
+	}
+}
 
