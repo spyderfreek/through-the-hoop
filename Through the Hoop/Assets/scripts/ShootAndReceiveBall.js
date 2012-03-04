@@ -27,25 +27,41 @@ public var szWinScene;
 
 private var nTimeBallInPlay = 0.0f;
 
+private var nBestTime = 9999.0f;
+
+private var szFileName;
+
 public function GetTimeBallInPlay()
 {
 return nTimeBallInPlay;
 }
 
+function Start () {
+    var Pathname = EditorApplication.currentScene;
 
+	//szFileName = System.IO.Path.GetFileName(Pathname);
+	szFileName = System.IO.Path.GetFileNameWithoutExtension(Pathname);
+//	szFileName = szFileName.replace(".unity","");
+	//PlayerPrefs.SetFloat(szFileName + "_BestTime",nBestTime);
+	//System.IO.Path.GetFileNameWithoutExtension
+	var nLoadedBestTime = PlayerPrefs.GetFloat(szFileName + "_BestTime",nBestTime);
+	nBestTime = nLoadedBestTime;
+}
 function OnGUI(){
 
 	//using whatever texture is fine as long as there is no transparent textures	
 	//drawing the Fading
- 	GUI.color = new Color(0, 0, 0, fTimeSinceFirstLoop/ fTimeWinDiration);
-	GUI.DrawTexture( new Rect(0, 0, Screen.width, Screen.height ), blackTexture );
-	
+
 	//draw the timer
  	GUI.color = new Color(1,1,1,1);
-
-
-	GUI.Box(new Rect(Screen.width * 16/20, 0, Screen.width * 4/20, Screen.height * 3/20 ), "Time: \n" + Mathf.RoundToInt(nTimeBallInPlay));
+	GUI.Box(new Rect(Screen.width * 15/20, 0, Screen.width * 5/20, Screen.height * 3/20 ), 
+			"Time: \t" + Mathf.FloorToInt(nTimeBallInPlay)+ 
+			"\nBest Time: \t" + Mathf.FloorToInt(nBestTime));
 	//GUI.Box(new Rect(0,0,50,50), "Time: " + roundNumber(num, dec));
+	
+	 	GUI.color = new Color(0, 0, 0, fTimeSinceFirstLoop/ fTimeWinDiration);
+	GUI.DrawTexture( new Rect(0, 0, Screen.width, Screen.height ), blackTexture );
+	
 }
 
 function Update () {
@@ -130,17 +146,24 @@ function WinHit()
 {
 
 
-Debug.Log("Winhit");
+	Debug.Log("Winhit");
 	bWin = true;
-goBall.transform.position = this.transform.position;
-goBall.rigidbody.velocity.x = 0.0;
-goBall.rigidbody.velocity.y = 0.0;
+	goBall.transform.position = this.transform.position;
+	goBall.rigidbody.velocity.x = 0.0;
+	goBall.rigidbody.velocity.y = 0.0;
 
 
-Time.timeScale = fWinTimeScale;
+	Time.timeScale = fWinTimeScale;
 
-//also save the timer.
+	//also save the timer.
+	if (this.nTimeBallInPlay < nBestTime)
+		nBestTime = nTimeBallInPlay;
+		
+	//save to registry
 
+	PlayerPrefs.SetString("LastWinStage", szFileName);
+	PlayerPrefs.SetFloat(szFileName + "_BestTime",nBestTime);
+	//PlayerPrefs.SetFloat("Player Score", 10.0);
 }
 
 function OnTriggerEnter (myTrigger : Collider) {
