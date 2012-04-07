@@ -40,6 +40,9 @@ function Start()
 	rectCredit = new Rect(rectInstruction);
 	rectCredit.y += yChangeRect;
 	
+	//set the stage select to default to 1
+	PlayerPrefs.SetString("LastWinStage", "");
+	
 }
 
 function OnGUI()
