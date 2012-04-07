@@ -8,6 +8,5 @@ function OnTriggerEnter(other:Collider){
 function OnTriggerStay (other : Collider) {
     if( other.name == "Ball(Clone)" ) {
     	GameObject.Find( "BallStart" ).GetComponent( ShootAndReceiveBall ).Init();
-    	other.rigidbody.velocity = -transform.up * Vector3.Distance(other.transform.position, transform.position) * suckForceScale;
     }
 }
