@@ -8,6 +8,10 @@ function start(){
 
 function OnTriggerStay (other : Collider) {
     ball = other.gameObject;
+    
+    // ignore other objects
+    if( ! (ball.name == "Ball(Clone)") ) return;
+    
     ballTransform = other.transform;
     
     var myTransform:Transform = gameObject.GetComponent("Transform");
