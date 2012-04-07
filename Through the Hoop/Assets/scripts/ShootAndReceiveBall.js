@@ -40,10 +40,13 @@ function Start () {
     var Pathname = EditorApplication.currentScene;
 
 	//szFileName = System.IO.Path.GetFileName(Pathname);
-	szFileName = System.IO.Path.GetFileNameWithoutExtension(Pathname);
+	//szFileName = System.IO.Path.GetFileNameWithoutExtension(Pathname);
+	
+	szFileName = Application.loadedLevelName;
 //	szFileName = szFileName.replace(".unity","");
 	//PlayerPrefs.SetFloat(szFileName + "_BestTime",nBestTime);
 	//System.IO.Path.GetFileNameWithoutExtension
+	var szLoadTime:String =szFileName + "_BestTime"; 
 	var nLoadedBestTime = PlayerPrefs.GetFloat(szFileName + "_BestTime",nBestTime);
 	nBestTime = nLoadedBestTime;
 }
@@ -156,8 +159,8 @@ function WinHit()
 	Time.timeScale = fWinTimeScale;
 
 	//also save the timer.
-	if (this.nTimeBallInPlay < nBestTime)
-		nBestTime = nTimeBallInPlay;
+	if (Mathf.FloorToInt(this.nTimeBallInPlay) < nBestTime)
+		nBestTime = Mathf.FloorToInt(nTimeBallInPlay);
 		
 	//save to registry
 
