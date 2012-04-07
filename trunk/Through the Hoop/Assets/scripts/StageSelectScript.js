@@ -54,6 +54,8 @@ private var nImageStartY :int;
 private var nImageWidth : int;
 private var nImageHeight : int;
 
+private var nPage: int;
+public var nTotalStages : int = 9;
 function Start()
 {
 	nButtonBoxStartX = (3.0f/4.0f) * Screen.width - 20;
@@ -78,6 +80,8 @@ function Start()
 	
 	nButtonSizeX_GO = nButtonSizeX_Stage;
 	nButtonSizeY_GO = nButtonSizeY_Stage;
+	
+	nPage = 0;
 
 //back
 	nButtonStartX_Back = nButtonStartX_Stage;
@@ -99,12 +103,73 @@ function Start()
 function OnGUI()
 {
 //background box
-	GUI.Box (Rect (10,10,Screen.width - 20, Screen.height - 20), "Stage Select");
+	GUI.Box (Rect (10,Screen.height * .01,Screen.width - 20, Screen.height - (Screen.height * .01 *2)), "Stage Select");
 
-	GUI.Box (Rect (nButtonBoxStartX,nButtonBoxStartY,nButtonBoxWidth,nButtonBoxHeight+40),"");
+	//stagebox
+	var recStageBox = Rect (nButtonBoxStartX,Screen.height * .02f,nButtonBoxWidth,Screen.height - (Screen.height * .02f *2));
+	GUI.Box (recStageBox,"");
 	
-	GUI.Box(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * nSelectedStage) - 5, nButtonStartY_Stage + ((nButtonNextY_Stage * nSelectedStage)/2) -5, nButtonSizeX_Stage + 10, nButtonSizeY_Stage + 10),"");
 	
+	var recSelectBox = new Rect(nButtonStartX_Stage + (nButtonNextX_Stage * nSelectedStage) - 5, nButtonStartY_Stage + ((nButtonNextY_Stage * nSelectedStage)/2) -5, nButtonSizeX_Stage + 10, nButtonSizeY_Stage + 10);
+	//select box
+	//GUI.Box(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * nSelectedStage) - 5, nButtonStartY_Stage + ((nButtonNextY_Stage * nSelectedStage)/2) -5, nButtonSizeX_Stage + 10, nButtonSizeY_Stage + 10),"");
+	
+	var rectSelectionArea = new Rect (recStageBox.x + (Screen.width * .01f ), recStageBox.y + (Screen.height * .01f),
+				recStageBox.width - (Screen.width * .02f ), recStageBox.height - (Screen.height * .02f) );
+	
+	//GUI.Box(rectSelectionArea,"testarea");
+	
+	GUILayout.BeginArea(rectSelectionArea,"test");
+	if (GUILayout.Button("Back",GUILayout.Height(rectSelectionArea.height / 7.3f )))
+	{
+		if(nPage > 0)
+			nPage --;
+	}
+	
+	var nLevelStart = (nPage * 5);
+	
+
+	for(var nI = 0; nI < 5; ++nI)
+	{
+		var nCurrentButtonLevel: int = nLevelStart + 1 + nI;
+		if(nCurrentButtonLevel <= nTotalStages)
+		{
+			if (GUILayout.Button("Level " + (nCurrentButtonLevel),GUILayout.Height(rectSelectionArea.height / 7.3f )))
+			{
+				nSelectedStage = nCurrentButtonLevel -1;
+			}
+		}
+		else
+		{
+			GUILayout.Box("", GUILayout.Height(rectSelectionArea.height / 7.3f ));
+		}
+	
+	}
+	
+
+	//GUILayout.Button("Level " + (nCurrentButtonLevel),GUILayout.Height(rectSelectionArea.height / 7.3f ));
+	
+	//GUILayout.Button("Level " + (nCurrentButtonLevel),GUILayout.Height(rectSelectionArea.height / 7.3f ));
+	
+	//GUILayout.Button("Level " + (nCurrentButtonLevel),GUILayout.Height(rectSelectionArea.height / 7.3f));
+	
+	//GUILayout.Button("Level " + (nCurrentButtonLevel),GUILayout.Height(rectSelectionArea.height / 7.3f));
+	
+	//GUILayout.Button("Level " + (nCurrentButtonLevel),GUILayout.Height(rectSelectionArea.height / 7.3f));
+	
+	
+	if( GUILayout.Button("Next",GUILayout.Height(rectSelectionArea.height / 7.3f)))
+	{
+		if(nTotalStages > ((nPage+1) *5))
+		{
+			nPage ++;
+		}
+	}
+
+	GUILayout.EndArea();
+	
+	if(false)
+	{
 	if(GUI.Button(Rect(nButtonStartX_Stage + (nButtonNextX_Stage * 0), nButtonStartY_Stage + (nButtonNextY_Stage * 0)/2, nButtonSizeX_Stage, nButtonSizeY_Stage),"Level 1"))
 	{
 		nSelectedStage = 0;
@@ -131,8 +196,9 @@ function OnGUI()
 	{
 		nSelectedStage = 5;
 	}		
-	
+	}
 	//Go
+	//if(false)
 	if(GUI.Button(Rect(nButtonStartX_GO-200,nButtonStartY_GO, nButtonSizeX_GO,nButtonSizeY_GO),"Start"))
 	{
 	 	switch( nSelectedStage)
@@ -162,7 +228,8 @@ function OnGUI()
 	}
 	
 	//back
-	if(GUI.Button(Rect(nButtonStartX_Back-200,nButtonStartY_Back, nButtonSizeX_Back,nButtonSizeY_Back),"Back"))
+	//if(false)
+	if(GUI.Button(Rect(nImageStartX,nButtonStartY_Back, nButtonSizeX_Back,nButtonSizeY_Back),"Back"))
 	{
 		//go back to main menu 
 		levelToLoad = "MainMenu";
@@ -170,47 +237,61 @@ function OnGUI()
 	} 
 	
 	//drawImage
-	GUI.Box(Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight),"");
+	var szStageName :String= "";
+	var rectImageBox = Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight);
+	
 	switch( nSelectedStage)
 	{
 	 	case 0:
 			if ( picStage_0 != null)
 			{
-				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_0 ); 
+				GUI.DrawTexture( rectImageBox, picStage_0 ); 
+				szStageName = szStage_0;
 			}
 			break;
 		case 1:
 			if ( picStage_1 != null)
 			{
-				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_1 ); 
+				GUI.DrawTexture( rectImageBox, picStage_1 ); 
+				szStageName = szStage_1;
 			}
 			break;
 		case 2:
  			if ( picStage_2 != null)
-			{
-				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_2 ); 
+ 			{
+				GUI.DrawTexture( rectImageBox, picStage_2 ); 
+				szStageName = szStage_2;
 			}
 			break;
 		case 3:
  			if ( picStage_3 != null)
-			{
-				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_3 ); 
+ 			{
+				GUI.DrawTexture( rectImageBox, picStage_3 ); 
+				szStageName = szStage_3;
 			}
 			break;
 		case 4:
  			if ( picStage_4 != null)
-			{
-				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_4 ); 
+ 			{
+				GUI.DrawTexture(rectImageBox, picStage_4 ); 
+				szStageName = szStage_4;
 			}
 			break;
 		case 5:
  			if ( picStage_5 != null)
-			{
-				GUI.DrawTexture( new Rect(nImageStartX,nImageStartY,nImageWidth,nImageHeight), picStage_5 ); 
+ 			{
+				GUI.DrawTexture( rectImageBox, picStage_5 ); 
+				szStageName = szStage_5;
 			}
 			break;
 
 	}
+
+	var rectSelectedStageBox : Rect = Rect ( nImageStartX,nImageStartY - (Screen.height * .05f),nImageWidth , Screen.height *0.04f);
+	GUI.Box(rectSelectedStageBox, szStageName);
+				
+	
+	
 }
 function Update () {
 	if( hasSelectedLevel && Application.CanStreamedLevelBeLoaded( levelToLoad ) ) {
