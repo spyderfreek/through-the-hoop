@@ -519,6 +519,27 @@ function Start()
 	TextureArray_Stages[97] =  picStage_97  ;
 	TextureArray_Stages[98] =  picStage_98  ;
 	TextureArray_Stages[99] =  picStage_99   ;
+	
+	//get the next place for default highlighting
+	var szLastWinStage :String = "";
+	szLastWinStage = PlayerPrefs.GetString("LastWinStage","");
+	if(szLastWinStage != "")
+	{
+		for(var iTotalStages = 0; iTotalStages < nTotalStages; ++iTotalStages)
+		{
+			if(szLastWinStage == szaStageName[iTotalStages])
+			{
+				if(iTotalStages+1 < nTotalStages)
+					nSelectedStage = iTotalStages +1;
+				else
+					nSelectedStage = iTotalStages;	
+					
+				nPage = nSelectedStage / 5;
+			}
+		}
+	
+	}
+	
 }
 
 function OnGUI()
@@ -596,14 +617,22 @@ function OnGUI()
 		var nCurrentButtonLevel: int = nLevelStart + 1 + nI;
 		if(nCurrentButtonLevel <= nTotalStages)
 		{
+			if(nSelectedStage == nCurrentButtonLevel -1)
+			{
+				GUILayout.Button("--- Level " + (nCurrentButtonLevel) + " ---",GUILayout.ExpandHeight(true));
+			}
+			else
+			{
 			if (GUILayout.Button("Level " + (nCurrentButtonLevel),GUILayout.ExpandHeight(true)))
 			{
 				nSelectedStage = nCurrentButtonLevel -1;
 			}
+			}
 		}
 		else
 		{
-			GUILayout.Box("",GUILayout.ExpandHeight(true));
+			GUILayout.Label("",GUILayout.ExpandHeight(true));
+		
 		}
 	
 	}
