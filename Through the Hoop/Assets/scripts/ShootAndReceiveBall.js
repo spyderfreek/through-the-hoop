@@ -37,7 +37,7 @@ return nTimeBallInPlay;
 }
 
 function Start () {
-    var Pathname = EditorApplication.currentScene;
+    var Pathname = Application.currentScene;
 
 	//szFileName = System.IO.Path.GetFileName(Pathname);
 	//szFileName = System.IO.Path.GetFileNameWithoutExtension(Pathname);
