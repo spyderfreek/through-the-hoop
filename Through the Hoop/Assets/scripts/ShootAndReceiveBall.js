@@ -1,17 +1,18 @@
 public var prefab:GameObject;
 
-private var bBallLaunched = false;
+@HideInInspector
+public var bBallLaunched = false;
 
 //timer to check for trigger after launched
 private var fTimePassed:float = 0.0f;
 public var fTimeToCheck:float = 1.0f;
 
-//keep an instinse of a ball
-private var goBall:GameObject = null;
+//keep an instance of a ball
+@HideInInspector
+public var goBall:GameObject = null;
 
 //keep track of how long will the win screen will last
 public var fWinTimeScale:float = 1.5f;
-public var fWinTimeAccel:float = 0.02f;
 
 private var fTimeSinceFirstLoop = 0.0f;
 public var fTimeWinDiration = 5.0f;
@@ -84,18 +85,14 @@ function Update () {
 	
 	if(bWin == true)
 	{
-	fTimeSinceFirstLoop += Time.deltaTime / Time.timeScale;
+	fTimeSinceFirstLoop += Time.deltaTime;
 	
 		if(fTimeSinceFirstLoop > fTimeWinDiration)
 		{
 			//change to win scene
-			Time.timeScale = 1;
 			Application.LoadLevel("WinScreen");
 		}
-		else if( !hasLevelSwitched )
-		{
-			Time.timeScale += fWinTimeAccel;
-		}
+
 		Debug.Log( "hasLevelSwitched = " + hasLevelSwitched );
 	
 	}
@@ -147,26 +144,28 @@ function ShootBall()
 
 function WinHit()
 {
-
-
-	Debug.Log("Winhit");
-	bWin = true;
 	goBall.transform.position = this.transform.position;
 	goBall.rigidbody.velocity.x = 0.0;
 	goBall.rigidbody.velocity.y = 0.0;
 
-
-	Time.timeScale = fWinTimeScale;
-
-	//also save the timer.
-	if (Mathf.FloorToInt(this.nTimeBallInPlay) < nBestTime)
-		nBestTime = Mathf.FloorToInt(nTimeBallInPlay);
-		
-	//save to registry
-
-	PlayerPrefs.SetString("LastWinStage", szFileName);
-	PlayerPrefs.SetFloat(szFileName + "_BestTime",nBestTime);
-	//PlayerPrefs.SetFloat("Player Score", 10.0);
+	if( !bWin ) {
+		Debug.Log("Winhit");
+		bWin = true;
+	
+		audio.Play(0);
+	
+		//Time.timeScale = fWinTimeScale;
+	
+		//also save the timer.
+		if (Mathf.FloorToInt(this.nTimeBallInPlay) < nBestTime)
+			nBestTime = Mathf.FloorToInt(nTimeBallInPlay);
+			
+		//save to registry
+	
+		PlayerPrefs.SetString("LastWinStage", szFileName);
+		PlayerPrefs.SetFloat(szFileName + "_BestTime",nBestTime);
+		//PlayerPrefs.SetFloat("Player Score", 10.0);
+	}
 }
 
 function OnTriggerEnter (myTrigger : Collider) {
@@ -176,9 +175,7 @@ function OnTriggerEnter (myTrigger : Collider) {
  	if(bBallLeft == false)
  		return;
  
- //if(  Vector3.Dot( myTrigger.rigidbody.velocity, transform.up ) < 0
- //	&& Vector3.Dot( transform.position - myTrigger.transform.position, transform.up ) < 0 )
- 	
+ //if(  Vector3.Dot( myTrigger.rigidbody.velocity, transform.up ) < 0 )
  	if(myTrigger.transform.position.y > this.transform.position.y)
  	{
   		WinHit();
