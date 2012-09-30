@@ -3,6 +3,7 @@ private var goOtherPortalTrigger:GameObject;
 
 
 public var fTimeDelay:float = 1.0f;
+public var travelTime:float = 0.2;
 private var fTimeFromLastCollision:float = fTimeDelay;
 private var bCanUse = true;
 
@@ -75,13 +76,22 @@ if(bCanUse == true)
 	var fMagnatude:float = myTrigger.gameObject.rigidbody.velocity.magnitude;
 
 
-	//set the other object not to be able to use.
+	//prevent trail from wiping across the whole screen during teleportation
+	var trail:TrailRenderer = myTrigger.gameObject.GetComponent(TrailRenderer);
+	trail.enabled = false;
+	myTrigger.gameObject.renderer.enabled = false;
+	yield WaitForSeconds(travelTime);
+	
 
+	myTrigger.gameObject.renderer.enabled = true;
 	//set the object to the other portal.
 	goBall.rigidbody.velocity = goOtherPortalTrigger.transform.up * fMagnatude;
 	goBall.transform.position = goOtherPortalTrigger.transform.position;
 	
 	
+	
+	if( myTrigger.gameObject != null )
+		trail.enabled = true;
 	
  }
 

@@ -22,7 +22,7 @@ private var moveErrorDifferential: Vector3 = Vector3.zero;
 
 function GetLaunched()
 {
-	return GameObject.Find("BallStart").GetComponent("ShootAndReceiveBall").bBallLaunched;
+	return GameObject.Find("BallStart").GetComponent(ShootAndReceiveBall).bBallLaunched;
 }
 
 function ChangeColor( newColor : Color )
@@ -142,7 +142,7 @@ function OnMouseUp()
         
         if( rigidbody.SweepTest(Vector3.down, hitInfo, 5) ) {
         	rigidbody.isKinematic = true;
-        	transform.position += hitInfo.distance * Vector3.down;
+        	//transform.position += hitInfo.distance * Vector3.down;
 	        Debug.Log( "test hit: " + hitInfo.distance );
         	//transform.position += hitInfo.distance * Vector3.down;
         }
