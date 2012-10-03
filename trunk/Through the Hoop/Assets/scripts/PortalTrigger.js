@@ -3,7 +3,7 @@ private var goOtherPortalTrigger:GameObject;
 
 
 public var fTimeDelay:float = 1.0f;
-public var travelTime:float = 0.2;
+private var travelTime:float = 0.5f;
 private var fTimeFromLastCollision:float = fTimeDelay;
 private var bCanUse = true;
 
